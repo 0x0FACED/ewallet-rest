@@ -83,7 +83,6 @@ func (s *Server) getWalletStatusHandler(w http.ResponseWriter, r *http.Request) 
 	vars := mux.Vars(r)
 	walletID := vars["walletId"]
 
-	// Получение состояния кошелька
 	wallet, err := s.store.WalletDB.CheckStatus(walletID)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -94,7 +93,6 @@ func (s *Server) getWalletStatusHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	// Формирование ответа в формате JSON с ID и балансом созданного кошелька
 	response := struct {
 		ID      string  `json:"id"`
 		Balance float64 `json:"balance"`
@@ -103,7 +101,6 @@ func (s *Server) getWalletStatusHandler(w http.ResponseWriter, r *http.Request) 
 		Balance: wallet.Balance,
 	}
 
-	// Установка заголовка Content-Type для указания формата ответа
 	w.Header().Set("Content-Type", "application/json")
 
 	w.WriteHeader(http.StatusOK)
@@ -130,22 +127,17 @@ func (s *Server) sendMoneyHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		switch {
 		case errors.Is(err, sql.ErrNoRows):
-			// Если кошелек не найден, возвращаем статус ответа 404
 			http.Error(w, "sender wallet not found", http.StatusNotFound)
 		case errors.Is(err, errors.New("there are not enough funds")):
-			// Если недостаточно средств на кошельке, возвращаем статус ответа 400
 			http.Error(w, "not enough funds", http.StatusBadRequest)
 		case errors.Is(err, errors.New("target wallet not found")):
-			// Если целевой кошелек не найден, возвращаем статус ответа 404
 			http.Error(w, "target wallet not found", http.StatusNotFound)
 		default:
-			// В случае других ошибок, возвращаем статус ответа 500
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		}
 		return
 	}
 
-	// Если успешно, возвращаем статус ответа 200
 	w.WriteHeader(http.StatusOK)
 
 }
@@ -165,11 +157,9 @@ func (s *Server) getTransactionHistoryHandler(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	// Return the transaction history as JSON
 	w.WriteHeader(http.StatusOK)
 	err = json.NewEncoder(w).Encode(transactions)
 	if err != nil {
 		return
 	}
-
 }
