@@ -1,10 +1,7 @@
-package server
+package main
 
-import "flag"
-
-var flagConfig = flag.String("config", "./configs/server.toml", "path to config file")
+import "ewallet/cmd"
 
 func main() {
-	flag.Parse()
-
+	cmd.Execute()
 }
