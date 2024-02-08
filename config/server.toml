@@ -1,5 +1,2 @@
 bind_address = ":8080"
-log_level = "debug"
-
-[store]
-database_url = "host=localhost dbname=test_db sslmode=disable"
+database_url = "user=postgres password=lexacoolman dbname=ewallet_db sslmode=disable"
