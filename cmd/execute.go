@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"ewallet/pkg/server"
+	"ewallet/internal/app/server"
 	"flag"
 	"github.com/BurntSushi/toml"
 	"log"
