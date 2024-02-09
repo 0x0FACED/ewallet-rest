@@ -1,6 +1,6 @@
 package main
 
-import "ewallet/cmd"
+import "github.com/MisterGnida/ewallet-rest/cmd"
 
 func main() {
 	cmd.Execute()

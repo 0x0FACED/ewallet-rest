@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"ewallet/internal/app/server"
 	"flag"
 	"github.com/BurntSushi/toml"
+	"github.com/MisterGnida/ewallet-rest/internal/app/server"
 	"log"
 )
 
