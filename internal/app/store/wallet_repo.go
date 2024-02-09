@@ -2,7 +2,7 @@ package store
 
 import (
 	"errors"
-	"ewallet/internal/app/model"
+	"github.com/MisterGnida/ewallet-rest/internal/app/model"
 )
 
 type WalletRepository interface {

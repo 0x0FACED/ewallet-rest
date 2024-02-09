@@ -3,7 +3,7 @@ package store
 import (
 	"database/sql"
 	"errors"
-	"ewallet/internal/app/model"
+	"github.com/MisterGnida/ewallet-rest/internal/app/model"
 	"log"
 )
 

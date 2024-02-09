@@ -1,12 +1,12 @@
 package store
 
 import (
-	"ewallet/internal/app/model"
+	"github.com/MisterGnida/ewallet-rest/internal/app/model"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-var dbUrl = "user=postgres password=lexacoolman dbname=ewallet_db_test sslmode=disable"
+var dbUrl = "user=your_username password=yourpass dbname=your_test_db sslmode=disable"
 
 // Helper
 func newTestWalletDB(t *testing.T) *WalletDB {
@@ -27,11 +27,11 @@ func TestWalletDB_Create(t *testing.T) {
 
 	// Change ID here
 	expected := &model.Wallet{
-		ID:      "21adefec-8b4c-4c57-91e3-539d4279f3b0",
+		ID:      "21ade2ec-8b4c-4c57-91e3-539d4279f3b0",
 		Balance: 100,
 	}
 	// And here
-	actual, err := wDb.Create("21adefec-8b4c-4c57-91e3-539d4279f3b0", 100)
+	actual, err := wDb.Create("21ade2ec-8b4c-4c57-91e3-539d4279f3b0", 100)
 
 	assert.NoError(t, err)
 	assert.Equal(t, expected, actual)

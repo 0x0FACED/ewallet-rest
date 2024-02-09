@@ -11,7 +11,7 @@ import (
 	"testing"
 )
 
-var dbUrl = "user=postgres password=lexacoolman dbname=ewallet_db_test sslmode=disable"
+var dbUrl = "user=your_username password=yourpass dbname=your_test_db sslmode=disable"
 
 // Helper
 func newTestServer(t *testing.T) *Server {
@@ -34,7 +34,7 @@ func TestServer_Start(t *testing.T) {
 	s := New(
 		&Config{
 			BindAddress: ":8080",
-			DatabaseUrl: ""},
+			DatabaseUrl: dbUrl},
 	)
 
 	go func() {

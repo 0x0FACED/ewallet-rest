@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
-	"ewallet/internal/app/store"
 	"fmt"
+	"github.com/MisterGnida/ewallet-rest/internal/app/store"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 	"log/slog"
@@ -32,7 +32,6 @@ func (s *Server) Start() error {
 	if err := s.configureStore(s.config); err != nil {
 		return err
 	}
-	defer s.store.Close()
 	return http.ListenAndServe(s.config.BindAddress, s.router)
 }
 
