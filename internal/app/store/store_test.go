@@ -12,7 +12,7 @@ func newTestStore(t *testing.T) *Store {
 
 func TestStore_Open(t *testing.T) {
 	s := newTestStore(t)
-	err := s.Open(dbUrl)
+	err := s.Open(dbURL)
 	assert.NoError(t, err)
 }
 
