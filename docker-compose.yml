@@ -10,16 +10,16 @@ services:
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: yourusername
-      POSTGRES_PASSWORD: yourpassword
-      POSTGRES_DB: yourdbname
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_pass
+      POSTGRES_DB: your_dbname
     volumes:
       - ./migrations:/migrations
       - pgdata:/var/lib/postgresql/data
     command: >
         bash -c "/usr/local/bin/docker-entrypoint.sh postgres &
                  sleep 10 &&
-                 psql -U your_username -d your_db -f /migrations/000004_new_tables.up.sql &&
+                 psql -U your_username -d your_dbname -f /migrations/000004_new_tables.up.sql &&
                  while true; do sleep 1000; done"
       
 volumes:
