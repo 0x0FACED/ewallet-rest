@@ -36,7 +36,6 @@ func (s *Server) Start() error {
 }
 
 func (s *Server) configureLogger() {
-	slog.Level.Level(slog.LevelDebug)
 	logger := slog.Default()
 	s.Logger = logger
 }
@@ -53,7 +52,7 @@ func (s *Server) configureRouter() {
 
 func (s *Server) configureStore(config *Config) error {
 	st := store.New()
-	if err := st.Open(config.DatabaseUrl); err != nil {
+	if err := st.Open(config.DatabaseURL); err != nil {
 		s.Logger.Error("Failed to Open() store:", err)
 		return err
 	}
@@ -64,10 +63,10 @@ func (s *Server) configureStore(config *Config) error {
 
 // createWalletHandler handles the creation of a new wallet
 func (s *Server) createWalletHandler(w http.ResponseWriter, r *http.Request) {
-	newUuid := uuid.New().String()
-	fmt.Println(newUuid)
+	newUUID := uuid.New().String()
+	fmt.Println(newUUID)
 	var db = s.store.GetWalletDB()
-	wallet, err := db.Create(newUuid, 100)
+	wallet, err := db.Create(newUUID, 100)
 	if err != nil {
 		s.Logger.Error("Failed to create wallet:", err)
 		http.Error(w, "Failed to create wallet", http.StatusInternalServerError)
@@ -114,7 +113,7 @@ func (s *Server) getWalletStatusHandler(w http.ResponseWriter, r *http.Request) 
 			}
 			return
 		}
-		s.Logger.Error("Error in FindById():", err)
+		s.Logger.Error("Error in FindByID():", err)
 		http.Error(w, "internal Server Error", http.StatusInternalServerError)
 		return
 	}
