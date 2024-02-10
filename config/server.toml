@@ -1,2 +1,2 @@
 bind_address = ":8080"
-database_url = "user=your_username password=yourpass dbname=your_db host=db sslmode=disable"
+database_url = "user=your_username password=your_pass dbname=your_dbname host=db sslmode=disable"
