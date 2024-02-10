@@ -1,5 +1,5 @@
 .PHONY: all
-all: help test run
+all: help test run lint
 
 .PHONY: test
 test:
@@ -10,6 +10,10 @@ test:
 run:
 	@echo "Running application..."
 	@go run ./cmd/server/main.go
+
+.PHONY: lint
+lint:
+	golangci-lint run
 
 .PHONY: help
 help:
