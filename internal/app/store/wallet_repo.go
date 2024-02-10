@@ -7,7 +7,7 @@ import (
 
 type WalletRepository interface {
 	Create(id string, balance float64) (*model.Wallet, error)
-	FindById(id string) (*model.Wallet, error)
+	FindByID(id string) (*model.Wallet, error)
 	CheckStatus(walletID string) (*model.Wallet, error)
 }
 
@@ -35,7 +35,7 @@ func (walletDb *WalletDB) Create(id string, balance float64) (*model.Wallet, err
 	return &w, nil
 }
 
-func (walletDb *WalletDB) FindById(id string) (*model.Wallet, error) {
+func (walletDb *WalletDB) FindByID(id string) (*model.Wallet, error) {
 	var db = walletDb.store.Db
 	wallet := &model.Wallet{}
 	query := "SELECT id, balance FROM wallets WHERE id = $1"
@@ -49,7 +49,7 @@ func (walletDb *WalletDB) FindById(id string) (*model.Wallet, error) {
 }
 
 func (walletDb *WalletDB) CheckStatus(walletID string) (*model.Wallet, error) {
-	wallet, err := walletDb.FindById(walletID)
+	wallet, err := walletDb.FindByID(walletID)
 	if err != nil {
 		return nil, err
 	}
