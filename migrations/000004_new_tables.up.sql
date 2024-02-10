@@ -1,8 +1,8 @@
 -- 4_up.sql
 
 -- Удаление существующих таблиц, если они существуют
-DROP TABLE IF EXISTS transactions;
-DROP TABLE IF EXISTS wallets;
+-- DROP TABLE IF EXISTS transactions;
+-- DROP TABLE IF EXISTS wallets;
 
 -- Создание новых таблиц с id type VARCHAR
 CREATE TABLE wallets
