@@ -11,14 +11,14 @@ import (
 	"testing"
 )
 
-var dbUrl = "user=your_username password=yourpass dbname=your_test_db sslmode=disable"
+var dbURL = "user=your_username password=yourpass dbname=your_test_db sslmode=disable"
 
 // Helper
 func newTestServer(t *testing.T) *Server {
 	t.Helper()
 	config := &Config{
 		BindAddress: ":8080",
-		DatabaseUrl: dbUrl,
+		DatabaseURL: dbURL,
 	}
 	s := New(config)
 	s.configureLogger()
@@ -34,7 +34,7 @@ func TestServer_Start(t *testing.T) {
 	s := New(
 		&Config{
 			BindAddress: ":8080",
-			DatabaseUrl: dbUrl},
+			DatabaseURL: dbURL},
 	)
 
 	go func() {
@@ -72,7 +72,7 @@ func TestServer_CreateWalletHandler(t *testing.T) {
 func TestServer_GetWalletStatusHandler_NotFound(t *testing.T) {
 	s := newTestServer(t)
 
-	req, err := http.NewRequest("GET", "/api/v1/wallet/some-id", nil)
+	req, _ := http.NewRequest("GET", "/api/v1/wallet/some-id", nil)
 	vars := map[string]string{"walletId": "some-id"}
 	req = mux.SetURLVars(req, vars)
 
@@ -88,7 +88,7 @@ func TestServer_GetWalletStatusHandler_NotFound(t *testing.T) {
 		ID      string  `json:"id"`
 		Balance float64 `json:"balance"`
 	}
-	err = json.Unmarshal(rr.Body.Bytes(), &response)
+	err := json.Unmarshal(rr.Body.Bytes(), &response)
 	assert.NoError(t, err, "failed to unmarshal JSON response")
 	assert.NotEqual(t, "2bb46c30-670c-419c-80a1-40d591437e49", response.ID, "handler returned unexpected ID")
 }
