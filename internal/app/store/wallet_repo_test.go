@@ -6,13 +6,13 @@ import (
 	"testing"
 )
 
-var dbUrl = "user=your_username password=yourpass dbname=your_test_db sslmode=disable"
+var dbURL = "user=your_username password=yourpass dbname=your_test_db sslmode=disable"
 
 // Helper
 func newTestWalletDB(t *testing.T) *WalletDB {
 	t.Helper()
 	st := New()
-	err := st.Open(dbUrl)
+	err := st.Open(dbURL)
 	if err != nil {
 		return nil
 	}
@@ -41,7 +41,7 @@ func TestWalletDB_FindById(t *testing.T) {
 	wDb := newTestWalletDB(t)
 
 	expectedID := "21adefec-8b4c-4c57-91e3-539d4279f3b0"
-	actual, err := wDb.FindById("21adefec-8b4c-4c57-91e3-539d4279f3b0")
+	actual, err := wDb.FindByID("21adefec-8b4c-4c57-91e3-539d4279f3b0")
 
 	assert.NoError(t, err)
 	assert.Equal(t, expectedID, actual.ID)
