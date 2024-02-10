@@ -38,11 +38,11 @@ func (tDb *TransactionDB) CreateTransaction(senderID, recipientID string, amount
 }
 
 func (tDb *TransactionDB) TransferMoney(from, to string, amount float64) error {
-	fromWallet, err := tDb.store.WalletDB.FindById(from)
+	fromWallet, err := tDb.store.WalletDB.FindByID(from)
 
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return errors.New("sender wallet not found")
+			return err
 		}
 	}
 
@@ -50,7 +50,7 @@ func (tDb *TransactionDB) TransferMoney(from, to string, amount float64) error {
 		return errors.New("there are not enough funds")
 	}
 
-	toWallet, err := tDb.store.WalletDB.FindById(to)
+	toWallet, err := tDb.store.WalletDB.FindByID(to)
 	if err != nil {
 		return errors.New("target wallet not found")
 	}
@@ -86,10 +86,10 @@ func (tDb *TransactionDB) TransferMoney(from, to string, amount float64) error {
 }
 
 func (tDb *TransactionDB) GetWalletTransactions(walletID string) ([]model.Transaction, error) {
-	_, err := tDb.store.WalletDB.FindById(walletID)
+	_, err := tDb.store.WalletDB.FindByID(walletID)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return nil, errors.New("sender wallet not found")
+			return nil, err
 		}
 	}
 	transactions := make([]model.Transaction, 0)
